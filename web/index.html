@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plane Loading Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header -->
+      <header class="app-header">
+        <h1>✈ Plane Loading Simulator</h1>
+        <div class="elapsed-time">
+          <span class="label">Elapsed</span>
+          <span class="value" id="time-display">0.0s</span>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <!-- Visualization Panel -->
+        <section class="vis-panel">
+          <div class="plane-container">
+            <div class="plane-body" id="plane-body">
+                <!-- Grid will be injected by main.ts -->
+                <div class="plane-nose"></div>
+                <!-- Labels -->
+                <div class="plane-labels">
+                  <div class="entrance-label">ENTRANCE</div>
+                  <div class="col-labels">
+                    <span class="l-cell">Window</span>
+                    <span class="l-cell">Aisle</span>
+                    <span class="l-cell">Walkway</span>
+                  </div>
+                </div>
+            </div>
+            <div class="queue-area" id="queue-area">
+                <div class="queue-title" id="queue-title">Queue: 0 waiting</div>
+                <div class="queue-dots" id="queue-dots"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Controls Panel -->
+        <aside class="controls-panel">
+          
+          <div class="control-group">
+            <h2>Boarding Strategy</h2>
+            <div class="radio-grid">
+              <label class="radio-option">
+                <input type="radio" name="strategy" value="random" checked>
+                <span class="custom-radio"></span>
+                Random Order
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="strategy" value="back_to_front">
+                <span class="custom-radio"></span>
+                Back to Front
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="strategy" value="front_to_back">
+                <span class="custom-radio"></span>
+                Front to Back
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="strategy" value="one_per_row">
+                <span class="custom-radio"></span>
+                One Per Row
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group timings">
+            <h2>Timing Controls</h2>
+            
+            <div class="slider-container">
+              <div class="slider-header">
+                <label>Time to move 1 row</label>
+                <div class="number-input-wrap">
+                  <input type="number" id="move-val" min="0.2" max="5.0" step="0.1" value="1.0">
+                  <span class="unit">s</span>
+                </div>
+              </div>
+              <input type="range" id="t-move" min="0.2" max="5.0" step="0.1" value="1.0">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <label>Time to store bags & take seat</label>
+                <div class="number-input-wrap">
+                  <input type="number" id="store-val" min="0.0" max="10.0" step="0.1" value="3.0">
+                  <span class="unit">s</span>
+                </div>
+              </div>
+              <input type="range" id="t-store" min="0.0" max="10.0" step="0.1" value="3.0">
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <label>Time to move past passenger</label>
+                <div class="number-input-wrap">
+                  <input type="number" id="pass-val" min="0.0" max="5.0" step="0.1" value="2.0">
+                  <span class="unit">s</span>
+                </div>
+              </div>
+              <input type="range" id="t-pass" min="0.0" max="5.0" step="0.1" value="2.0">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h2>Speed</h2>
+            <div class="speed-toggles" id="speed-toggles">
+              <button class="speed-btn active" data-speed="1">1×</button>
+              <button class="speed-btn" data-speed="2">2×</button>
+              <button class="speed-btn" data-speed="5">5×</button>
+              <button class="speed-btn" data-speed="10">10×</button>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="btn-start" class="btn-start">▶ START</button>
+            <button id="btn-reset" class="btn-reset">↺ RESET</button>
+          </div>
+          
+        </aside>
+      </main>
+
+      <!-- Footer / Legend -->
+      <footer class="app-footer">
+        <div class="legend">
+          <span class="legend-title">LEGEND:</span>
+          <div class="legend-item"><span class="dot queued"></span> Queued</div>
+          <div class="legend-item"><span class="dot walking"></span> Walking</div>
+          <div class="legend-item"><span class="dot storing"></span> Storing Bags</div>
+          <div class="legend-item"><span class="dot waiting"></span> Waiting for Row</div>
+          <div class="legend-item"><span class="dot seated"></span> Seated</div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
