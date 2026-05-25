@@ -1,6 +1,22 @@
 # loading_plane_simulator
 Animating different techniques for passengers to load onto planes
 
+# Setup
+To run the python version of this app, run 
+
+```
+python main.py 
+```
+
+To run the typescript version of this app, run 
+```
+npm i
+npm run dev
+```
+while inside the web/ folder. 
+
+# Description 
+
 We simulate a flight as 10 rows of 2 seats each. This is for simplicity and to make the animations finish faster. This is a total of 20 passengers on the plane. 
 The first row is 'first class' which is functionally identical to the rest of the plane. 
 
